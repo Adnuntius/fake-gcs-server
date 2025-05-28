@@ -116,5 +116,6 @@ You may use `docker build` to build the image locally instead of pulling it
 from Docker Hub:
 
 ```shell
-docker build -t fsouza/fake-gcs-server .
+docker build --tag docker-repository.adnuntius.com/adn/docker/fake-gcs-server .
+docker push docker-repository.adnuntius.com/adn/docker/fake-gcs-server
 ```

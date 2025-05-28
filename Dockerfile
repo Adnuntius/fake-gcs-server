@@ -11,8 +11,12 @@ ENV CGO_ENABLED=0
 RUN go build -o fake-gcs-server
 
 FROM alpine:3.21.3
+RUN adduser appuser -D -H
 RUN apk add --no-cache mailcap
 COPY --from=builder /code/fake-gcs-server /bin/fake-gcs-server
+RUN mkdir /storage
+RUN chown appuser: /storage
+USER appuser
 RUN /bin/fake-gcs-server -h
 EXPOSE 4443
 ENTRYPOINT ["/bin/fake-gcs-server", "-data", "/data"]
